@@ -1,0 +1,8 @@
+FROM opensuse/leap:15
+
+RUN zypper refresh
+
+RUN useradd -ms /bin/bash user
+RUN echo 'user ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+USER user
+WORKDIR /home/user

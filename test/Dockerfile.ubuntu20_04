@@ -1,0 +1,10 @@
+FROM ubuntu:20.04
+
+RUN apt-get update
+
+RUN useradd -ms /bin/bash user
+RUN echo 'user ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+USER user
+WORKDIR /home/user
+
+

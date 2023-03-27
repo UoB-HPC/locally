@@ -1,0 +1,9 @@
+FROM rockylinux:9
+
+# This will be installed on normal images
+RUN dnf install -y dnf-plugins-core cpio findutils
+
+RUN useradd -ms /bin/bash user
+RUN echo 'user ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+USER user
+WORKDIR /home/user

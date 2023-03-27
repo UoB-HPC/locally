@@ -1,0 +1,9 @@
+FROM redhat/ubi8
+
+# This will be installed on normal images
+RUN dnf install -y cpio
+
+RUN useradd -ms /bin/bash user
+RUN echo 'user ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+USER user
+WORKDIR /home/user

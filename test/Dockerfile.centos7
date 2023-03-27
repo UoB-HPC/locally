@@ -1,0 +1,6 @@
+FROM centos:7
+
+RUN useradd -ms /bin/bash user
+RUN echo 'user ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+USER user
+WORKDIR /home/user

@@ -1,0 +1,8 @@
+FROM registry.suse.com/suse/sle15:15.4.27.11.31
+
+RUN zypper refresh
+
+RUN useradd -ms /bin/bash user
+RUN echo 'user ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+USER user
+WORKDIR /home/user
