@@ -60,7 +60,9 @@ run_install() {
       exit 1
     fi
 
-    # See if we're on an EL platform, if so, add EPEL
+    # TODO  See if we're on an EL platform, if so, add EPEL
+
+    # TO0DO remove CentOS stuff
 
     # shellcheck disable=SC2086
     dnf download --nogpgcheck --resolve --alldeps --downloaddir $cache_dir --arch "$(uname -m)" \

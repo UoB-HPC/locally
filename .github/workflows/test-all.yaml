@@ -1,0 +1,29 @@
+name: Test all distros
+on:
+  push:
+    branches: [main]
+jobs:
+  run-commands:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - Dockerfile.fedora37
+          - Dockerfile.fedora38
+          - Dockerfile.almalinux8
+          - Dockerfile.almalinux9
+          - Dockerfile.centos7
+          - Dockerfile.debian10
+          - Dockerfile.debian11
+          - Dockerfile.rockylinux8
+          - Dockerfile.rockylinux9
+          - Dockerfile.suse15
+          - Dockerfile.sles15
+          - Dockerfile.ubuntu20_04
+          - Dockerfile.ubuntu22_04
+          - Dockerfile.rhel8
+          - Dockerfile.rhel9"
+    steps:
+      - uses: actions/checkout@v3
+      - name: ${{ matrix.input }}
+        run: test/test.sh ${{ matrix.input }}
