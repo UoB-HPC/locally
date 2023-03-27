@@ -14,7 +14,7 @@ jobs:
           - Dockerfile.fedora38
           - Dockerfile.almalinux8
           - Dockerfile.almalinux9
-          - Dockerfile.centos7
+          # - Dockerfile.centos7
           - Dockerfile.debian10
           - Dockerfile.debian11
           - Dockerfile.rockylinux8

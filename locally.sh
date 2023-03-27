@@ -149,13 +149,13 @@ setup_modulefile() {
   if [ ! -f "$modulefile" ]; then
     cat >"$modulefile" <<EOF
 #%Module1.0
-prepend-path  PATH             $prefix_dir/bin
-prepend-path  PATH             $prefix_dir/usr/bin
+prepend-path  PATH             $prefix_dir/bin:$prefix_dir/usr/bin
 prepend-path  CPATH            $prefix_dir/usr/include
-prepend-path  LIBRARY_PATH     $prefix_dir/lib64
-prepend-path  LIBRARY_PATH     $prefix_dir/lib
-prepend-path  LD_LIBRARY_PATH  $prefix_dir/lib64
-prepend-path  LD_LIBRARY_PATH  $prefix_dir/lib
+prepend-path  LIBRARY_PATH     $prefix_dir/lib64:$prefix_dir/lib
+prepend-path  LIBRARY_PATH     $prefix_dir/usr/lib64:$prefix_dir/usr/lib
+prepend-path  LIBRARY_PATH     $prefix_dir/lib/$(uname -m)-linux-gnu
+prepend-path  LD_LIBRARY_PATH  $prefix_dir/lib64:$prefix_dir/lib
+prepend-path  LD_LIBRARY_PATH  $prefix_dir/usr/lib64:$prefix_dir/usr/lib
 prepend-path  LD_LIBRARY_PATH  $prefix_dir/lib/$(uname -m)-linux-gnu
 prepend-path  MANPATH          $prefix_dir/usr/share/man
 EOF
@@ -230,10 +230,11 @@ enable)
   if (return 0 2>/dev/null); then
     prefix=$(get_prefix "$in_dir")
     echo "Enabling prefix at $prefix"
+    libpaths="$prefix/usr/lib64:$prefix/usr/lib:$prefix/lib64:/$prefix/lib:/$prefix/lib/$(uname -m)-linux-gnu"
     export PATH="$prefix/usr/bin:$prefix/bin:${PATH:-}"
     export CPATH="$prefix/usr/include:${CPATH:-}"
-    export LIBRARY_PATH="$prefix/lib64:/$prefix/lib:${LIBRARY_PATH:-}"
-    export LD_LIBRARY_PATH="$prefix/lib64:/$prefix/lib:/$prefix/lib/$(uname -m)-linux-gnu:${LD_LIBRARY_PATH:-}"
+    export LD_LIBRARY_PATH="$libpaths:${LD_LIBRARY_PATH:-}"
+    export LIBRARY_PATH="$libpaths:${LIBRARY_PATH:-}"
     export MANPATH="$prefix/usr/share/man:${MANPATH:-}"
   else
     echo "You must source this script to enable prefix, e.g: source $0 enable" && exit 1
