@@ -23,7 +23,7 @@ jobs:
           - Dockerfile.ubuntu20_04
           - Dockerfile.ubuntu22_04
           - Dockerfile.rhel8
-          - Dockerfile.rhel9"
+          - Dockerfile.rhel9
     steps:
       - uses: actions/checkout@v3
       - name: ${{ matrix.image }}
