@@ -5,14 +5,22 @@ Essentially, an unprivileged user (e.g in HPC, education, or work settings) can 
 
 Locally achieves this by invoking the actual system package manager but only for resolving dependencies and downloading packages from mirrors.
 Once the packages are downloaded, a prefixed installation is done where we extract the content of the packages to a writeable prefix.
-Once installed, packages can be made available by prepending to the correct environment variables (e.g `PATH`, `LD_LIBRARY_PATH`).
 
 ## Quick start
 
-```shell
-locally install nano # no sudo required
-source locally enable
+To install, run:
 
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/UoB-HPC/locally/main/locally.sh)"
+```
+
+Install packages:
+
+```shell
+> locally install nano # no sudo required
+> source locally enable
+> which nano 
+~/.locally/x86_64/fedora/usr/bin/nano
 
 ```
 
@@ -20,4 +28,4 @@ source locally enable
 
 ### What about systemd?
 
-It's likely a systemd package will be installed as an indirect dependency, however, this is parallel to your system's own systemd daemon running with root so it's mostly useless.
+It's likely a systemd package will be installed as an indirect dependency at some point, however, this is parallel to your system's own systemd daemon running with root so it's mostly useless.
