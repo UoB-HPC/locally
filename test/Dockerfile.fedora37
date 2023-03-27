@@ -1,4 +1,4 @@
-FROM fedora:37
+FROM docker.io/fedora:37
 
 # This will be installed on normal images
 RUN dnf install -y dnf-plugins-core cpio

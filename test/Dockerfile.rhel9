@@ -1,4 +1,4 @@
-FROM redhat/ubi9
+FROM docker.io/redhat/ubi9
 
 # This will be installed on normal images
 RUN dnf install -y cpio

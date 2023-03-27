@@ -1,4 +1,4 @@
-FROM rockylinux:8
+FROM docker.io/rockylinux:8
 
 # This will be installed on normal images
 RUN dnf install -y dnf-plugins-core cpio findutils

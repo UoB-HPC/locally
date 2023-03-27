@@ -1,4 +1,4 @@
-FROM almalinux:9
+FROM docker.io/almalinux:9
 
 # This will be installed on normal images
 RUN dnf install -y dnf-plugins-core cpio

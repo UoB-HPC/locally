@@ -4,6 +4,7 @@ on:
     branches: [main]
 jobs:
   run-commands:
+    name: ${{ matrix.image }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
