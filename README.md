@@ -11,7 +11,7 @@ Once the packages are downloaded, a prefixed installation is done where we extra
 To install, run:
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/UoB-HPC/locally/main/locally.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/UoB-HPC/locally/main/install.sh)"
 ```
 
 Install packages:
