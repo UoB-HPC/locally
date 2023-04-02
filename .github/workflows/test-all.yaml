@@ -11,6 +11,10 @@ jobs:
       matrix:
         package:
           - { name: make, validate: "make --version" }
+          - { name: nano, validate: "nano --version" }
+          - { name: gcc, validate: "gcc --version" }
+          - { name: gdb, validate: "gdb --version" }
+          - { name: cmake, validate: "cmake --version" }
         image:
           - Dockerfile.fedora37
           - Dockerfile.fedora38
@@ -29,5 +33,5 @@ jobs:
           - Dockerfile.rhel9
     steps:
       - uses: actions/checkout@v3
-      - name: ${{ matrix.image }}
+      - name: ${{ matrix.image }} [${{ matrix.package.name }}]
         run: test/test.sh ${{ matrix.image }} ${{ matrix.package.name }} "${{ matrix.package.validate }}"
