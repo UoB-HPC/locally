@@ -9,6 +9,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        package:
+          - { name: make, validate: "make --version" }
         image:
           - Dockerfile.fedora37
           - Dockerfile.fedora38
@@ -28,4 +30,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: ${{ matrix.image }}
-        run: test/test.sh ${{ matrix.image }}
+        run: test/test.sh ${{ matrix.image }} ${{ matrix.package.name }} "${{ matrix.package.validate }}"
