@@ -4,7 +4,7 @@ on:
     branches: [main]
 jobs:
   run-commands:
-    name: ${{ matrix.image }}-[${{ matrix.package.name }}]
+    name: "[${{ matrix.package.name }}]-${{ matrix.image }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

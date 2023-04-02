@@ -153,7 +153,7 @@ prepend-path  PATH             $prefix_dir/bin:$prefix_dir/usr/bin
 prepend-path  CPATH            $prefix_dir/usr/include
 prepend-path  LIBRARY_PATH     $prefix_dir/lib64:$prefix_dir/lib
 prepend-path  LIBRARY_PATH     $prefix_dir/usr/lib64:$prefix_dir/usr/lib
-prepend-path  LIBRARY_PATH     $prefix_dir/lib/$(uname -m)-linux-gnu
+prepend-path  LIBRARY_PATH     $prefix_dir/lib/$(uname -m)-linux-gnu:$prefix_dir/usr/lib/$(uname -m)-linux-gnu
 prepend-path  LD_LIBRARY_PATH  $prefix_dir/lib64:$prefix_dir/lib
 prepend-path  LD_LIBRARY_PATH  $prefix_dir/usr/lib64:$prefix_dir/usr/lib
 prepend-path  LD_LIBRARY_PATH  $prefix_dir/lib/$(uname -m)-linux-gnu
@@ -230,7 +230,13 @@ enable)
   if (return 0 2>/dev/null); then
     prefix=$(get_prefix "$in_dir")
     echo "Enabling prefix at $prefix"
-    libpaths="$prefix/usr/lib64:$prefix/usr/lib:$prefix/lib64:/$prefix/lib:/$prefix/lib/$(uname -m)-linux-gnu"
+    libpaths=""
+    libpaths+="$prefix/usr/lib64:"
+    libpaths+="$prefix/usr/lib:"
+    libpaths+="$prefix/lib64:"
+    libpaths+="$prefix/lib:"
+    libpaths+="$prefix/usr/lib/$(uname -m)-linux-gnu:"
+    libpaths+="$prefix/lib/$(uname -m)-linux-gnu"
     export PATH="$prefix/usr/bin:$prefix/bin:${PATH:-}"
     export CPATH="$prefix/usr/include:${CPATH:-}"
     export LD_LIBRARY_PATH="$libpaths:${LD_LIBRARY_PATH:-}"
