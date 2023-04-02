@@ -4,7 +4,7 @@ on:
     branches: [main]
 jobs:
   run-commands:
-    name: ${{ matrix.image }}
+    name: ${{ matrix.image }}-[${{ matrix.package.name }}]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -15,23 +15,25 @@ jobs:
           - { name: gcc, validate: "gcc --version" }
           - { name: gdb, validate: "gdb --version" }
           - { name: cmake, validate: "cmake --version" }
+          - { name: git, validate: "git --version" }
+          - { name: clang, validate: "clang --version" }
         image:
-          - Dockerfile.fedora37
-          - Dockerfile.fedora38
-          - Dockerfile.almalinux8
-          - Dockerfile.almalinux9
-          # - Dockerfile.centos7
-          - Dockerfile.debian10
-          - Dockerfile.debian11
-          - Dockerfile.rockylinux8
-          - Dockerfile.rockylinux9
-          - Dockerfile.suse15
-          - Dockerfile.sles15
-          - Dockerfile.ubuntu20_04
-          - Dockerfile.ubuntu22_04
-          - Dockerfile.rhel8
-          - Dockerfile.rhel9
+          - fedora37
+          - fedora38
+          - almalinux8
+          - almalinux9
+          # - centos7
+          - debian10
+          - debian11
+          - rockylinux8
+          - rockylinux9
+          - suse15
+          - sles15
+          - ubuntu20_04
+          - ubuntu22_04
+          - rhel8
+          - rhel9
     steps:
       - uses: actions/checkout@v3
       - name: ${{ matrix.image }} [${{ matrix.package.name }}]
-        run: test/test.sh ${{ matrix.image }} ${{ matrix.package.name }} "${{ matrix.package.validate }}"
+        run: test/test.sh Dockerfile.${{ matrix.image }} ${{ matrix.package.name }} "${{ matrix.package.validate }}"
